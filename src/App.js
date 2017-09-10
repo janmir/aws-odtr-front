@@ -1,18 +1,66 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+const CONST_NODE = [
+  {
+    text: "Oh Hello there stranger.",
+    class: "font1"
+  },
+  {
+    text: "Asking what to do here?",
+    class: "font1"
+  },
+  {
+    text: "Well ummm, you can...",
+    class: "font1"
+  },
+  {
+    text: "Try the API Wizard.",
+    class: "font5"
+  },
+  {
+    text: "--- or ---",
+    class: "font1"
+  },
+  {
+    text: "Read the Documentation.",
+    class: "font4"
+  },
+  {
+    text: "Maybe some disclaimer?",
+    class: "font1"
+  }
+];
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      nodes: CONST_NODE
+    };
+  }
+
+  getNodes(){
+    //Empty texts array
+    let texts = []
+ 
+    //insert to text array
+    this.state.nodes.forEach((element) => {
+      texts.push( <div className={"Texts " + element.class}>
+        <span>
+        {element.text}
+        </span>
+      </div> );
+    });
+  
+    return texts;
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {this.getNodes()}
       </div>
     );
   }

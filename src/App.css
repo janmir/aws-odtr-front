@@ -1,24 +1,55 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
   color: white;
 }
 
-.App-intro {
-  font-size: large;
+.Texts {
+  height: 60px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.font1{
+  color: #888;  
+  font-size: 25px;
+  font-family: 'Sacramento', cursive;
+}
+
+.font2{
+  font-size: 20px;
+  color: #888;
+  font-family: 'Vibur', cursive;
+}
+
+.font3{
+  margin-top: 50px;
+  color: #888;
+  font-size: 20px;
+  font-family: 'Damion', cursive;
+}
+
+/*.font3{
+  margin-top: 50px;
+  color: #888;
+  font-size: 30px;
+  font-family: 'Damion', cursive;
+  font-size: 25px;
+  font-family: 'Vibur', cursive;
+  cursor: pointer;
+}*/
+
+.font4{
+  color: #24B0F5;
+  font-size: 25px;
+  font-family: 'Grand Hotel', cursive;
+  text-shadow: rgb(35, 31, 32) -4px 2px 0px, #000 -6px 5px 0px;  
+  cursor: pointer;  
+  height: 65px;
+}
+
+.font5{
+  color: #EC3950;
+  font-size: 21px;
+  font-family: 'Leckerli One', cursive;
+  text-shadow: rgb(35, 31, 32) -4px 2px 0px, #000 -6px 5px 0px;  
+  cursor: pointer;
+  height: 65px;
 }
