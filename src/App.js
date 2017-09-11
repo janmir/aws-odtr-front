@@ -16,7 +16,8 @@ const CONST_NODE = [
   },
   {
     text: "Try the API Wizard.",
-    class: "font5"
+    class: "font5",
+    onclick: true
   },
   {
     text: "--- or ---",
@@ -24,7 +25,8 @@ const CONST_NODE = [
   },
   {
     text: "Read the Documentation.",
-    class: "font4"
+    class: "font4",
+    onclick: true
   },
   {
     text: "--- or ---",
@@ -52,13 +54,20 @@ class App extends Component {
  
     //insert to text array
     this.state.nodes.forEach((element) => {
-      texts.push( 
-          <div className={"Texts " + element.class}>
-            <span>
-              {element.text}
-            </span>
-          </div> 
-        );
+      var onClickNode = <span>{element.text}</span>;
+      
+      if(element.onclick){
+        onClickNode = 
+        <span onClick={()=>alert('something')}>
+          {element.text}
+        </span>;
+      }
+
+      let node = 
+      <div className={"Texts " + element.class}>
+        {onClickNode}
+      </div>;
+      texts.push(node);
     });
   
     return texts;
