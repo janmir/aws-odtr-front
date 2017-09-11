@@ -64,6 +64,14 @@ class App extends Component {
     return texts;
   }
 
+  getFooter(){
+    return (
+      <div className = "Footer">
+        by jp with &lt;3
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="Parent">
@@ -71,6 +79,7 @@ class App extends Component {
           {this.state.title}
         </div>
         {this.getNodes()}
+        {this.getFooter()}
       </div> 
     );
   }
