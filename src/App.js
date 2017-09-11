@@ -27,6 +27,10 @@ const CONST_NODE = [
     class: "font4"
   },
   {
+    text: "--- or ---",
+    class: "font1"
+  },
+  {
     text: "Maybe some disclaimer?",
     class: "font1"
   }
@@ -37,6 +41,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      title: "odtr",
       nodes: CONST_NODE
     };
   }
@@ -47,11 +52,13 @@ class App extends Component {
  
     //insert to text array
     this.state.nodes.forEach((element) => {
-      texts.push( <div className={"Texts " + element.class}>
-        <span>
-        {element.text}
-        </span>
-      </div> );
+      texts.push( 
+          <div className={"Texts " + element.class}>
+            <span>
+              {element.text}
+            </span>
+          </div> 
+        );
     });
   
     return texts;
@@ -59,9 +66,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="Parent">
+        <div className="Logo">
+          {this.state.title}
+        </div>
         {this.getNodes()}
-      </div>
+      </div> 
     );
   }
 }
