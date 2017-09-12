@@ -1,5 +1,5 @@
 span{
-  padding: 5px 15px;
+  padding: 5px 0px;
   border-radius: 3px;
   user-select: none;
 }
@@ -11,6 +11,26 @@ span{
   overflow: hidden;
   /* background-color: #111; */
   margin-top: 50px;
+}
+
+.Link{
+  display: inline-block;
+  width: 225px;
+  position: relative;
+  /* transform-origin: 50% 50%;
+  transition: all 400ms ease-in; */
+}
+
+.Link div{
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  z-index: -1;
+  transition: all 400ms ease-in;
 }
 
 .Logo{
@@ -34,7 +54,7 @@ span{
 }
 
 .font5 span:hover, .font4 span:hover {
-  animation:  color-change 0.8s;
+  animation:  color-change 0.4s;
   animation-fill-mode: forwards;
   transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -60,16 +80,6 @@ span{
   font-size: 20px;
   font-family: 'Damion', cursive;
 }
-
-/*.font3{
-  margin-top: 50px;
-  color: #888;
-  font-size: 30px;
-  font-family: 'Damion', cursive;
-  font-size: 25px;
-  font-family: 'Vibur', cursive;
-  cursor: pointer;
-}*/
 
 .font4{
   color: #24B0F5;

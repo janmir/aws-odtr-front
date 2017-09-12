@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
 import './App.css';
 
 const CONST_NODE = [
@@ -38,14 +39,55 @@ const CONST_NODE = [
   }
 ];
 
+class Link extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (<span></span>);
+  }
+
+}
+
+class Footer extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+    <div className = "Footer">
+      by jp with &lt;3
+    </div>
+    );
+  }
+
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
-
+    this.handleClick = this.handleClick.bind(this);
+    this.handleHoverOff = this.handleHoverOff.bind(this);
+    
     this.state = {
       title: "odtr",
-      nodes: CONST_NODE
+      nodes: CONST_NODE,
+      open: false
     };
+  }
+
+  handleClick(){
+    this.setState({
+      open: true     
+    });
+  }
+
+  handleHoverOff(){
+    this.setState({
+      open: false    
+    });
   }
 
   getNodes(){
@@ -54,12 +96,19 @@ class App extends Component {
  
     //insert to text array
     this.state.nodes.forEach((element) => {
+      let style = this.state.open ? 100 : 20;
+      
       var onClickNode = <span>{element.text}</span>;
       
       if(element.onclick){
         onClickNode = 
-        <span onClick={()=>alert('something')}>
+        <span 
+          onMouseLeave={this.handleHoverOff}
+          onClick={this.handleClick} 
+          className="Link" 
+          >
           {element.text}
+          <div style={{ width: `${style}%`}}/>
         </span>;
       }
 
@@ -73,14 +122,6 @@ class App extends Component {
     return texts;
   }
 
-  getFooter(){
-    return (
-      <div className = "Footer">
-        by jp with &lt;3
-      </div>
-    );
-  }
-
   render() {
     return (
       <div className="Parent">
@@ -88,7 +129,7 @@ class App extends Component {
           {this.state.title}
         </div>
         {this.getNodes()}
-        {this.getFooter()}
+        <Footer/>
       </div> 
     );
   }
