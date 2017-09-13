@@ -1,65 +1,84 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
-import './App.css';
+import './AppSass.css';
+import heart from './heart.svg';
+
+const ISVG = require('react-inlinesvg');
 
 const CONST_NODE = [
   {
-    text: "Oh Hello there stranger.",
-    class: "font1"
+    text: "Oh Hello there stranger."
   },
   {
-    text: "Asking what to do here?",
-    class: "font1"
+    text: "Asking what to do here?"
   },
   {
-    text: "Well ummm, you can...",
-    class: "font1"
+    text: "Well ummm, you can..."
   },
   {
     text: "Try the API Wizard.",
-    class: "font5",
-    onclick: true
+    link: true
   },
   {
-    text: "--- or ---",
-    class: "font1"
+    text: "--- or ---"
   },
   {
-    text: "Read the Documentation.",
-    class: "font4",
-    onclick: true
+    text: "Read Documentation?",
+    link: true
   },
   {
-    text: "--- or ---",
-    class: "font1"
+    text: "--- or ---"
   },
   {
-    text: "Maybe some disclaimer?",
-    class: "font1"
+    text: "Maybe some disclaimer?"
   }
 ];
 
-class Link extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+/*******Node********/
+class Node extends Component {
   render() {
-    return (<span></span>);
+    var counter = 0;
+    var list = this.props.data.map((element) => {
+      return element.link ? 
+        <Link text={element.text}/> : 
+        <div className="text" key={counter++}>{element.text}</div>;
+    });
+
+    return <div>{list}</div>;
   }
 
 }
 
-class Footer extends Component {
+/*******Link********/
+class Link extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      activate: false
+    }
+  }
+
+  render() {
+    return (<div className="link">{this.props.text}</div>);
+  }
+
+}
+
+/*******Logo********/
+class Logo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "odtr"
+    };
   }
 
   render() {
     return (
-    <div className = "Footer">
-      by jp with &lt;3
-    </div>
+      <div className="logo">
+        {this.state.title}
+      </div>
     );
   }
 
@@ -90,6 +109,11 @@ class App extends Component {
     });
   }
 
+  componentWillMount(){
+    // Calling setState here does not cause a re-render
+    console.info('In Component Will Mount');
+  }
+
   getNodes(){
     //Empty texts array
     let texts = []
@@ -113,7 +137,7 @@ class App extends Component {
       }
 
       let node = 
-      <div className={"Texts " + element.class}>
+      <div className={"text " + element.class}>
         {onClickNode}
       </div>;
       texts.push(node);
@@ -124,12 +148,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="Parent">
-        <div className="Logo">
-          {this.state.title}
+      <div className="appParent">
+        <Logo/>
+        <Node data={this.state.nodes}/>
+        <div className = "footer">
+          by jp with
+          <ISVG src={heart}></ISVG>
         </div>
-        {this.getNodes()}
-        <Footer/>
       </div> 
     );
   }

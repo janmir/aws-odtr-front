@@ -1,0 +1,76 @@
+@import '_variables';
+
+// Templates
+.center-horizontally{
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Globals
+body{
+    font-family: sans-serif;
+    background-color: $color-background; 
+    user-select: none;
+}
+
+// Components
+.appParent{
+    text-align: center;
+    height: 550px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 50px;    
+}
+
+.nodeParent{
+    height: 100%;
+}
+
+.logo{
+    height: 105px;
+    color: $color-logo;
+    font-size: 75px;
+    font-family: $font-logo;
+    text-shadow: black -1px 3px 0px;
+}
+
+.nodeChildren{
+    height: 50px;
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+.text{
+    @extend .nodeChildren;
+    color: $color-text;
+    font-family: $font-text;
+}
+
+.link{
+    @extend .nodeChildren;
+    color: $color-link-1;
+    font-family: $font-link-1;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.link:nth-child(2){
+    @extend .nodeChildren;
+    color: $color-link-2;
+}
+
+.footer{
+    @extend .center-horizontally;
+    position: fixed;
+    font-size: 25px;
+    font-family: $font-footer;
+
+    svg{
+        height: 16px;
+        margin-left: 6px;
+        fill: $color-heart;
+    }
+}
+
+// Animations and micro-interactions
