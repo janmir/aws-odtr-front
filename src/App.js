@@ -39,8 +39,9 @@ class Node extends Component {
   render() {
     var counter = 0;
     var list = this.props.data.map((element) => {
+      console.log(counter);
       return element.link ? 
-        <Link text={element.text}/> : 
+        <Link text={element.text} onClickListener={()=>{console.log(counter)}} key={counter++}/> :
         <div className="text" key={counter++}>{element.text}</div>;
     });
 
@@ -60,7 +61,14 @@ class Link extends Component {
   }
 
   render() {
-    return (<div className="link">{this.props.text}</div>);
+    return (
+      <div 
+        className="link">
+        <span onClick={this.props.onClickListener}>
+          {this.props.text}
+        </span>
+      </div>
+    );
   }
 
 }

@@ -39,6 +39,7 @@ body{
     height: 50px;
     font-size: 25px;
     vertical-align: middle;
+    line-height: 50px;
 }
 
 .text{
@@ -49,15 +50,23 @@ body{
 
 .link{
     @extend .nodeChildren;
+
+    height: 50px;
     color: $color-link-1;
     font-family: $font-link-1;
     font-size: 21px;
-    cursor: pointer;
+
+    span{
+        position: relative;
+        display: inline-block;
+        padding: 0px 10px;
+        border-radius: 2px;
+        cursor: pointer;
+    }
 }
 
-.link:nth-child(2){
-    @extend .nodeChildren;
-    color: $color-link-2;
+.link span:hover{
+    background-color: $color-link-hover;
 }
 
 .footer{
