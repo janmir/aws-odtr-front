@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
 import './AppSass.css';
 import heart from './heart.svg';
@@ -109,7 +110,8 @@ class Logo extends Component {
   }
 
   componentWillReceiveProps(property){
-    console.log(this);
+    console.log(ReactDOM.findDOMNode(this));
+
     switch(property.hide){
       case 0:{
         console.log("Will show the component!");
@@ -162,17 +164,16 @@ class App extends Component {
   render() {
     return (
       <div className="appParent">
-        <ReactCSSTransitionGroup transitionName="anim" transitionAppear={true} transitionAppearTimeout={5000} transitionEnter={false} transitionLeave={false}>
+        <ReactCSSTransitionGroup transitionName="anim" transitionAppear={true} transitionAppearTimeout={500} transitionEnter={false} transitionLeave={false}>
           <Logo 
             hide = {this.state.open[0] | this.state.open[1]}/>
+          <Node 
+            onClickListener={this.handleClick} 
+            data={this.state.nodes}/>
         </ReactCSSTransitionGroup>
-        <Node 
-          onClickListener={this.handleClick} 
-          data={this.state.nodes}/>
-        <div 
-          className = "footer">
-            by jp with
-            <ISVG src={heart}></ISVG>
+        <div className = "footer">
+          by jp with
+          <ISVG src={heart}></ISVG>
         </div>
       </div> 
     );
