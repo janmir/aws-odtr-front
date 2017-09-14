@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
 import './AppSass.css';
 import heart from './heart.svg';
-
 const ISVG = require('react-inlinesvg');
 
+/*******The Data itself********/
 const CONST_NODE = [
   {
     text: "Oh Hello there stranger."
@@ -30,19 +30,33 @@ const CONST_NODE = [
     text: "--- or ---"
   },
   {
-    text: "Maybe some disclaimer?"
+    text: "Maybe some <span class='u'>disclaimer</span>?"
   }
 ];
 
 /*******Node********/
 class Node extends Component {
+  constructor(props) {
+    super(props);
+
+    //bindings
+    this.childOnClickListener = this.childOnClickListener.bind(this);
+  }
+
+  childOnClickListener(event, target){
+    //Call parent onClick call back to remove logo
+    this.props.onClickListener(event, target);
+
+    //remove top margin
+  }
+
   render() {
     var counter = 0;
+    var lCounter = 0;
     var list = this.props.data.map((element) => {
-      console.log(counter);
       return element.link ? 
-        <Link text={element.text} onClickListener={()=>{console.log(counter)}} key={counter++}/> :
-        <div className="text" key={counter++}>{element.text}</div>;
+        <Link text={element.text} onClickListener={this.childOnClickListener} id={lCounter++} key={counter++}/> :
+        <div className="text" key={counter++} dangerouslySetInnerHTML={{ __html: element.text }}/>;
     });
 
     return <div>{list}</div>;
@@ -55,18 +69,30 @@ class Link extends Component {
   constructor(props) {
     super(props);
 
+    //bindings
+    this.onClickListener = this.onClickListener.bind(this);
+
     this.state = {
       activate: false
     }
+  }
+
+  onClickListener(event){
+    this.props.onClickListener(event, this);
+    this.setState({activate: !this.state.activate});
   }
 
   render() {
     return (
       <div 
         className="link">
-        <span onClick={this.props.onClickListener}>
-          {this.props.text}
+        <span 
+          onClick={this.onClickListener} 
+          className={this.state.activate ? 'highlight': ''}>
+            {this.props.text}
         </span>
+        <div
+          className={this.state.activate ? 'activate': ''}/>
       </div>
     );
   }
@@ -82,9 +108,22 @@ class Logo extends Component {
     };
   }
 
+  componentWillReceiveProps(property){
+    console.log(this);
+    switch(property.hide){
+      case 0:{
+        console.log("Will show the component!");
+      }break;
+      case 1:{
+        console.log("Will hide the component!");
+      }break;
+      default:break;
+    }
+  }
+
   render() {
     return (
-      <div className="logo">
+      <div className={`logo ${this.props.hide  ? 'logoHide':''}`}>
         {this.state.title}
       </div>
     );
@@ -92,29 +131,27 @@ class Logo extends Component {
 
 }
 
+/*******Main App********/
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.handleHoverOff = this.handleHoverOff.bind(this);
     
     this.state = {
       title: "odtr",
       nodes: CONST_NODE,
-      open: false
+      open: [false, false]
     };
   }
 
-  handleClick(){
-    this.setState({
-      open: true     
-    });
-  }
+  handleClick(event, target){
+    let id = target.props.id;
+    let rev = !this.state.open[id];
+    let temp = this.state.open;
 
-  handleHoverOff(){
-    this.setState({
-      open: false    
-    });
+    temp[id] = rev;
+
+    this.setState({open: temp});
   }
 
   componentWillMount(){
@@ -122,46 +159,20 @@ class App extends Component {
     console.info('In Component Will Mount');
   }
 
-  getNodes(){
-    //Empty texts array
-    let texts = []
- 
-    //insert to text array
-    this.state.nodes.forEach((element) => {
-      let style = this.state.open ? 100 : 20;
-      
-      var onClickNode = <span>{element.text}</span>;
-      
-      if(element.onclick){
-        onClickNode = 
-        <span 
-          onMouseLeave={this.handleHoverOff}
-          onClick={this.handleClick} 
-          className="Link" 
-          >
-          {element.text}
-          <div style={{ width: `${style}%`}}/>
-        </span>;
-      }
-
-      let node = 
-      <div className={"text " + element.class}>
-        {onClickNode}
-      </div>;
-      texts.push(node);
-    });
-  
-    return texts;
-  }
-
   render() {
     return (
       <div className="appParent">
-        <Logo/>
-        <Node data={this.state.nodes}/>
-        <div className = "footer">
-          by jp with
-          <ISVG src={heart}></ISVG>
+        <ReactCSSTransitionGroup transitionName="anim" transitionAppear={true} transitionAppearTimeout={5000} transitionEnter={false} transitionLeave={false}>
+          <Logo 
+            hide = {this.state.open[0] | this.state.open[1]}/>
+        </ReactCSSTransitionGroup>
+        <Node 
+          onClickListener={this.handleClick} 
+          data={this.state.nodes}/>
+        <div 
+          className = "footer">
+            by jp with
+            <ISVG src={heart}></ISVG>
         </div>
       </div> 
     );

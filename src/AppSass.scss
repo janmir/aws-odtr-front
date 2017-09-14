@@ -35,6 +35,10 @@ body{
     text-shadow: black -1px 3px 0px;
 }
 
+.logoHide{
+    display: none;
+}
+
 .nodeChildren{
     height: 50px;
     font-size: 25px;
@@ -46,27 +50,58 @@ body{
     @extend .nodeChildren;
     color: $color-text;
     font-family: $font-text;
+
+    span.u{
+        display: inline-block;
+        border-bottom: 1px dashed $color-text;
+        height: 32px;
+        cursor: pointer;
+
+        &:hover{
+            color: $color-text-hover;
+        }
+    }
+}
+
+.highlight{
+    background-color: $color-link-hover;
 }
 
 .link{
     @extend .nodeChildren;
 
+    position: relative;
     height: 50px;
     color: $color-link-1;
     font-family: $font-link-1;
     font-size: 21px;
 
+    div{
+        @extend .center-horizontally;
+        @extend .highlight;
+
+        position: absolute;
+        height: 100%;
+        width: 0%;
+        bottom: -25px;
+        z-index: -1;
+
+        &.activate{
+            width: 100%;
+        }
+    }
+
     span{
-        position: relative;
         display: inline-block;
         padding: 0px 10px;
         border-radius: 2px;
         cursor: pointer;
-    }
-}
+        z-index: 0;
 
-.link span:hover{
-    background-color: $color-link-hover;
+        &:hover{
+            @extend .highlight;
+        }
+    }
 }
 
 .footer{
@@ -83,3 +118,11 @@ body{
 }
 
 // Animations and micro-interactions
+.anim-appear {
+    opacity: 0.01;
+}
+   
+.anim-appear.anim-appear-active{
+    opacity: 2;
+    transition: opacity 5s ease-in;
+}
