@@ -88,7 +88,7 @@ body{
     transition-property: height, margin;
     transition-duration: 0.65s;
     transition-timing-function: $easeOutQuint;
-    transition-delay: 1.4s;
+    transition-delay: 1.25s;
 
     &.stretch{
         margin-bottom: $viewport-height;
@@ -108,9 +108,9 @@ body{
         
         /*CSS animations*/
         transition-property: width, opacity;
-        transition-duration: 0.8s, 1.25s;
+        transition-duration: 0.6s, 1.25s;
         transition-timing-function: $easeOutQuart;
-        transition-delay: 0.8s;
+        transition-delay: 0.75s;
 
         &.activate{
             width: 100%;
@@ -134,9 +134,9 @@ body{
 
         /*CSS animations*/
         transition-property: height, bottom;
-        transition-duration: 0.6s;
+        transition-duration: 0.5s;
         transition-timing-function: $easeOutQuint;
-        transition-delay: 1.4s;
+        transition-delay: 1.25s;
 
         &.activate{
             height: $viewport-height;
@@ -155,7 +155,7 @@ body{
         z-index: 0;
 
         /*CSS animations*/
-        transition: background-color 0.5s $easeOutQuint;
+        transition: background-color 0.7s $easeOutQuint;
 
         &:hover{
             @extend .highlight;
