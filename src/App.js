@@ -60,16 +60,15 @@ class Documentation extends Component {
 
   render() {
     return (<span>
-      All APIs in this web service is written in REST-ful format.<br/>
-      Publicly accessible APIs are only available in GET requests. <br/>
-      Top-most domain: <i><u>https://api.janmir.me/aws-odtr-v2</u></i> <br/>
-      1️⃣  "/login" :Login to ODTR by supplying username and password.<br/>
+      All publicly accessible APIs are only available in REST - GET requests. <br/>
+      Top-most domain: <i><u>https://api.janmir.me/aws-odtr-v2</u></i> <br/><br/>
+      1️⃣ &nbsp;<b>/login</b> :Login to ODTR by supplying username and password.<br/>
       ▪ Params: username, password & email (optional)<br/>
       ▪ Response: result, verified, username, execution<br/>
-      2️⃣  "/check" :Login and then checks ODTR details. <br/>
+      2️⃣ &nbsp;<b>/check</b> :Login and then checks ODTR details. <br/>
       ▪ Params: username, password & email (optional)<br/>
       ▪ Response: result, verified, username, execution, since, record, date<br/>
-      3️⃣ "/biteme" :Login then perform timein/timeout.<br/>
+      3️⃣ &nbsp;<b>/biteme</b> :Login then perform timein/timeout.<br/>
       ▪ Params: username, password & email (optional)<br/>
       ▪ Response: result, verified, username, execution<br/>
     </span>);

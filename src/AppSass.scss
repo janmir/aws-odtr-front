@@ -84,7 +84,7 @@ body{
     font-family: $font-link-1;
     font-size: 21px;
 
-    // Animation
+    /*CSS animations*/
     transition-property: height, margin;
     transition-duration: 0.65s;
     transition-timing-function: $easeOutQuint;
@@ -154,6 +154,9 @@ body{
         cursor: pointer;
         z-index: 0;
 
+        /*CSS animations*/
+        transition: background-color 0.5s $easeOutQuint;
+
         &:hover{
             @extend .highlight;
         }
@@ -189,7 +192,7 @@ body{
 }
 
 .nodeContainer{
-    // Animation
+    /*CSS animations*/
     transition-property: margin;
     transition-duration: 0.55s;
     transition-timing-function: $easeOutBack;
@@ -206,4 +209,5 @@ body{
 .anim-appear.anim-appear-active{
     opacity: 2;
     transition: opacity 0.5s ease-in;
+    transition-delay: 0.1s;
 }
