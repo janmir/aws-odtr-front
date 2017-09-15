@@ -17,7 +17,7 @@ body{
 // Components
 .appParent{
     text-align: center;
-    height: 550px;
+    height: 590px;
     width: 100%;
     overflow: hidden;
     margin-top: 50px; 
@@ -160,6 +160,16 @@ body{
         &:hover{
             @extend .highlight;
         }
+    }
+
+    span.tool{
+        background-color: $color-text;
+        color: #000;
+        padding: 1px 4px;
+        margin: 0px 3px;
+        border-radius: 5px;
+        font-size: 12px;
+        cursor: pointer;        
     }
 }
 

@@ -45,9 +45,10 @@ class Wizard extends Component {
 
   render() {
     return (<span>
-    ✨Hello there 🎅🏼! <del>I'm Santa</del>, I'm the 🌠Wizard🌟! I can turn you into a 🦎 or 🐓 or help you out with the API. <br/>
-    As matter of fact all you have to do is fill up the fields below and the url will "automagically" be generated for you. <br/>
-    Amazing? I know right? Im a 🚀Wizard⚡ after all...Enjoy👏🏻 - Rock on🤘🏻 - Prosper..Whatever!🎏🗾🎎
+      <b>--API Wizard v.0.1--</b><br/>
+      ✨Hello there 🎅🏼! <del>I'm Santa</del>, I'm the 🌠Wizard🌟! I can turn you into a 🦎 or 🐓 or help you out with the API. <br/>
+      As matter of fact all you have to do is fill up the fields below and the url will "automagically" be generated for you. <br/>
+      Amazing? I know right? Im a 🚀Wizard⚡ after all...Enjoy👏🏻 - Rock On🤘🏻 - Prosper🌸 - Whatever!🎏🗾🎎
     </span>);
   }
 }
@@ -60,17 +61,30 @@ class Documentation extends Component {
 
   render() {
     return (<span>
+      <b>--API Docs v.0.1--</b><br/>
       All publicly accessible APIs are only available in REST - GET requests. <br/>
       Top-most domain: <i><u>https://api.janmir.me/aws-odtr-v2</u></i> <br/><br/>
       1️⃣ &nbsp;<b>/login</b> :Login to ODTR by supplying username and password.<br/>
       ▪ <i><b>Params</b></i>: username, password & email (optional)<br/>
-      ▪ <i><b>Response</b></i>: result, verified, username, execution<br/>
+      ▪ <i><b>Response</b></i>: 
+        <span className='tool'>result</span>, 
+        <span className='tool'>verified</span>, 
+        <span className='tool'>username</span>, 
+        <span className='tool'>execution</span><br/>
       2️⃣ &nbsp;<b>/check</b> :Login and then checks ODTR details. <br/>
       ▪ <i><b>Params</b></i>: username, password & email (optional)<br/>
-      ▪ <i><b>Response</b></i>: result, verified, username, execution, since, record, date<br/>
+      ▪ <i><b>Response</b></i>: 
+      <span className='tool'>result</span>, 
+      verified, username, execution,
+      <span className='tool'>since</span>, 
+      <span className='tool'>record</span>, 
+      <span className='tool'>date</span>, 
+      <br/>
       3️⃣ &nbsp;<b>/biteme</b> :Login then perform timein/timeout.<br/>
       ▪ <i><b>Params</b></i>: username, password & email (optional)<br/>
-      ▪ <i><b>Response</b></i>: result, verified, username, execution<br/>
+      ▪ <i><b>Response</b></i>: 
+      <span className='tool'>result</span>, 
+      verified, username, execution<br/>
     </span>);
   }
 }
