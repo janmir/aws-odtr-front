@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+
 import './AppSass.css';
 import heart from './heart.svg';
-const ISVG = require('react-inlinesvg');
+import { TweenLite } from 'gsap';
 
+const ISVG = require('react-inlinesvg');
 /*******The Data itself********/
 const CONST_NODE = [
   {
@@ -24,7 +26,7 @@ const CONST_NODE = [
     text: "--- or ---"
   },
   {
-    text: "Read Documentation?",
+    text: "Fancy Documentation?",
     link: true
   },
   {
@@ -34,6 +36,45 @@ const CONST_NODE = [
     text: "Maybe some <span class='u'>disclaimer</span>?"
   }
 ];
+
+/*******Wizard********/
+class Wizard extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (<span>
+    ✨Hello there 🎅🏼! <del>I'm Santa</del>, I'm the 🌠Wizard🌟! I can turn you into a 🦎 or 🐓 or help you out with the API. <br/>
+    As matter of fact all you have to do is fill up the fields below and the url will "automagically" be generated for you. <br/>
+    Amazing? I know right? Im a 🚀Wizard⚡ after all...Enjoy👏🏻 - Rock on🤘🏻 - Prosper..Whatever!🎏🗾🎎
+    </span>);
+  }
+}
+
+/*******Documentation********/
+class Documentation extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (<span>
+      All APIs in this web service is written in REST-ful format.<br/>
+      Publicly accessible APIs are only available in GET requests. <br/>
+      Top-most domain: <i><u>https://api.janmir.me/aws-odtr-v2</u></i> <br/>
+      1️⃣  "/login" :Login to ODTR by supplying username and password.<br/>
+      ▪ Params: username, password & email (optional)<br/>
+      ▪ Response: result, verified, username, execution<br/>
+      2️⃣  "/check" :Login and then checks ODTR details. <br/>
+      ▪ Params: username, password & email (optional)<br/>
+      ▪ Response: result, verified, username, execution, since, record, date<br/>
+      3️⃣ "/biteme" :Login then perform timein/timeout.<br/>
+      ▪ Params: username, password & email (optional)<br/>
+      ▪ Response: result, verified, username, execution<br/>
+    </span>);
+  }
+}
 
 /*******Node********/
 class Node extends Component {
@@ -83,17 +124,32 @@ class Link extends Component {
     this.setState({activate: !this.state.activate});
   }
 
+  getContents(target){
+    if(target.props.id === 0){
+      return <Wizard/>;
+    }else{
+      return <Documentation/>;
+    }
+  }
+
   render() {
     return (
       <div 
-        className="link">
+        className={`link ${this.state.activate ? 'stretch': ''}`}>
         <span 
+          id='banner'
           onClick={this.onClickListener} 
           className={this.state.activate ? 'highlight': ''}>
             {this.props.text}
         </span>
         <div
+          id='top'
           className={this.state.activate ? 'activate': ''}/>
+        <div 
+          id='bottom'
+          className={this.state.activate ? 'activate': ''}>
+          {this.getContents(this)}
+        </div>
       </div>
     );
   }
@@ -111,6 +167,13 @@ class Logo extends Component {
 
   componentWillReceiveProps(property){
     console.log(ReactDOM.findDOMNode(this));
+    /*TweenLite.to(ReactDOM.findDOMNode(this), 2, {width:"200px", height:"150px", 
+      onComplete: () => {
+        console.log("Will finish the component!");
+      }
+    });*/
+
+    //ReactDOM.findDOMNode(this).addEventListener("transitionend", () => { alert('done'); }, true);
 
     switch(property.hide){
       case 0:{
@@ -124,6 +187,7 @@ class Logo extends Component {
   }
 
   render() {
+    console.log("Will render the component!");
     return (
       <div className={`logo ${this.props.hide  ? 'logoHide':''}`}>
         {this.state.title}
@@ -140,20 +204,31 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     
     this.state = {
-      title: "odtr",
       nodes: CONST_NODE,
-      open: [false, false]
+      linkStates: [false, false],
+      containerClass: '',
+      open: false
     };
   }
 
   handleClick(event, target){
+    //For animating the hover
     let id = target.props.id;
-    let rev = !this.state.open[id];
-    let temp = this.state.open;
-
+    let rev = !this.state.linkStates[id];
+    let temp = this.state.linkStates;
+    
     temp[id] = rev;
+    let open = temp[0] | temp[1];
+    
+    //move margin
+    let containerClass = (open) ? id === 0 ? 'first' : 'second' : '';
 
-    this.setState({open: temp});
+    //Set all states at once
+    this.setState({
+      linkStates: temp,
+      containerClass: containerClass,
+      open: open
+    });
   }
 
   componentWillMount(){
@@ -164,12 +239,15 @@ class App extends Component {
   render() {
     return (
       <div className="appParent">
+        <div className = "header"/>
         <ReactCSSTransitionGroup transitionName="anim" transitionAppear={true} transitionAppearTimeout={500} transitionEnter={false} transitionLeave={false}>
           <Logo 
-            hide = {this.state.open[0] | this.state.open[1]}/>
-          <Node 
-            onClickListener={this.handleClick} 
-            data={this.state.nodes}/>
+            hide = {this.state.open}/>
+          <div className={`nodeContainer ${this.state.containerClass}`}>
+            <Node 
+              onClickListener={this.handleClick} 
+              data={this.state.nodes}/>
+          </div>
         </ReactCSSTransitionGroup>
         <div className = "footer">
           by jp with

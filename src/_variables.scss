@@ -1,9 +1,12 @@
+/*****************Fonts******************/
 $font-logo: 'Sacramento', cursive;
 $font-text: 'Sacramento', cursive;
 $font-link-1: 'Leckerli One', cursive;
 $font-link-2: 'Grand Hotel', cursive;
 $font-footer: 'Libre Barcode 39 Text', cursive;
+$font-formal: 'Voltaire', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 
+/*****************Colors******************/
 $color-background:  #231F20;
 $color-logo:        #999999;
 $color-text:        #777777;
@@ -12,3 +15,13 @@ $color-link-hover:  #151515;
 $color-link-1:      #EC3950;
 $color-link-2:      #24B0F5;
 $color-heart:       #7F0000;
+
+/*****************Ease******************/
+$easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+$easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
+$easeOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+/*****************Dimens******************/
+$viewport-height: 350px;
+$viewport-margin: 165px;
